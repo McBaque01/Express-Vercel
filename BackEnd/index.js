@@ -1,10 +1,12 @@
-const express = require('express')
+const express = require('express');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express();
 const port = 8080;
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+app.use(express.json());
+
 const uri = process.env.MONGODB_URI || "mongodb+srv://vercel-admin-user:hBojOvCZeapjKL4j@cluster0.npib522.mongodb.net/?retryWrites=true&w=majority";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
@@ -17,9 +19,7 @@ let db;
 
 async function run() {
     try {
-        // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
-        // Send a ping to confirm a successful connection
         db = client.db("Portfolio");
         await db.command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -59,10 +59,3 @@ function startServer() {
 run().catch(console.dir);
 
 module.exports = app;
-
-
-
-
-
-
-
