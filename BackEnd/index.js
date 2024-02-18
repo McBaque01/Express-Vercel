@@ -1,8 +1,8 @@
-import express  from "express";
+const express = require('express')
 const app = express();
 const port = 8080;
 
-import { MongoClient, ServerApiVersion } from 'mongodb';
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGODB_URI || "mongodb+srv://vercel-admin-user:hBojOvCZeapjKL4j@cluster0.npib522.mongodb.net/?retryWrites=true&w=majority";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -58,7 +58,7 @@ function startServer() {
 }
 run().catch(console.dir);
 
-export default app;
+module.exports = app;
 
 
 
